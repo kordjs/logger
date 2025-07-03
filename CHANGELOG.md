@@ -4,6 +4,17 @@ All notable changes to this library will be documented in this file.
 
 
 
+## [Unreleased]
+
+
+
+### Features
+
+- v2.1.3 ([3530afb…](https://github.com/kordjs/logger/commit/3530afb1397146849c41dd4850f84e6ff9330ab2))
+
+
+
+
 ## [2.1.0](https://github.com/kordjs/logger/releases/tag/2.1.0) - 2025-07-02
 
 
