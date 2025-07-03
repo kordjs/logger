@@ -1,0 +1,6 @@
+{
+  "name": "@kordjs/logger",
+  "packagePath": "src",
+  "tagTemplate": "{{new-version}}",
+  "identifierBase": false
+}

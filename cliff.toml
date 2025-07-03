@@ -1,0 +1,51 @@
+[changelog]
+header = """
+# Changelog
+
+All notable changes to this library will be documented in this file.
+"""
+body = """
+{% macro url() -%}
+https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro %}
+
+{% if version %}
+## [{{ version | trim_start_matches(pat="v") }}]({{ self::url() }}/releases/tag/{{ version }}){% if previous.version %} ([diff]({{ self::url() }}/compare/{{ previous.version }}...{{ version }})){% endif %} - {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}
+## [Unreleased]
+{% endif %}
+
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+{% for commit in commits %}
+- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | trim }} ([{{ commit.id | truncate(length=7) }}]({{ self::url() }}/commit/{{ commit.id }}))
+{% endfor %}
+{% endfor %}
+"""
+trim = true
+footer = ""
+
+[git]
+conventional_commits = true
+filter_unconventional = false
+tag_pattern = "^[0-9]+"
+commit_parsers = [
+  { message = "^feat", group = "Features" },
+  { message = "^fix", group = "Bug Fixes" },
+  { message = "^docs", group = "Documentation" },
+  { message = "^refactor", group = "Refactor" },
+  { message = "^test", group = "Tests" },
+  { message = "^style", group = "Styling" },
+  { message = "^perf", group = "Performance" },
+  { message = ".*deprecated", group = "Deprecation" },
+  { message = "^chore", skip = true },
+  { message = "^build", skip = true },
+  { message = "^ci", skip = true },
+  { message = ".*", group = "Other", default_scope = "other" }
+]
+filter_commits = true
+sort_commits = "newest"
+
+[remote.github]
+owner = "kordjs"
+repo = "logger"
