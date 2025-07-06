@@ -14,7 +14,7 @@
     "pretty": "prettier --write .",
     "lint": "eslint",
     "prepare": "npm run pretty && npm run lint && npm run build",
-    "release": "release-it",
+    "release": "release-it --ci",
     "docs": "typedoc",
     "start": "npm run build && clear && node ./tests/.node"
   },
